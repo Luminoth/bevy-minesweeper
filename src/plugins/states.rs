@@ -1,8 +1,7 @@
 use bevy::app::PluginGroupBuilder;
 use bevy::prelude::*;
 
-use crate::states;
-use crate::states::*;
+use crate::states::{self, *};
 
 pub struct StatesPlugins;
 

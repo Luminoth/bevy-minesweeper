@@ -1,3 +1,5 @@
+pub mod coordinates;
+
 use bevy::prelude::*;
 use bevy_inspector_egui::prelude::*;
 

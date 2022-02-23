@@ -4,6 +4,7 @@ mod plugins;
 mod resources;
 mod states;
 mod systems;
+mod util;
 
 use bevy::diagnostic::*;
 use bevy::prelude::*;
@@ -12,14 +13,19 @@ use bevy_inspector_egui::{WorldInspectorParams, WorldInspectorPlugin};
 
 use plugins::debug::*;
 use plugins::states::*;
+use resources::*;
 use states::*;
 
 const WINDOW_WIDTH: f32 = 1024.0;
 const WINDOW_HEIGHT: f32 = 768.0;
 
-fn setup(mut _commands: Commands, asset_server: Res<AssetServer>) {
+fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     #[cfg(debug_assertions)]
     asset_server.watch_for_changes().unwrap();
+
+    let random = Random::default();
+
+    commands.insert_resource(random);
 }
 
 fn main() {
@@ -35,7 +41,7 @@ fn main() {
         ..Default::default()
     })
     .insert_resource(bevy::log::LogSettings {
-        level: bevy::log::Level::DEBUG,
+        level: bevy::log::Level::INFO,
         ..Default::default()
     })
     .insert_resource(Msaa { samples: 4 })
